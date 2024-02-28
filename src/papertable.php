@@ -838,7 +838,7 @@ class PaperTable {
             '</strong></label>';
 
         // script.js depends on the HTML here
-        $updatem = $submitm = $requiredm = $freezem = "";
+        $updatem = $submitm = $requiredm = $freezem = $registerm = "";
         if (Conf::$now <= $sr->update) {
             $dlhtml = $this->conf->unparse_time_with_local_span($sr->update);
             $updatem = $this->conf->_c("paper_edit", "<5>You can update this {submission} until {:expandedtime}.", $sr->update);
@@ -848,6 +848,9 @@ class PaperTable {
         }
         if ($sr->freeze) {
             $freezem = $this->conf->_c("paper_edit", "<5>Completed {submissions} are frozen and cannot be changed further.");
+        }
+        if ($this->conf->unreg_submit) {
+            $registerm = $this->conf->_c("paper_edit", "<5><strong>To complete your {submission}, you will need to create an account and password in this platform, and submit it at a later stage.</strong>");
         }
         if ($autoready !== 0) {
             $requiredm = $this->conf->_c("paper_edit", "<5>You must fill out all required fields to mark the {submission} as {$complete}.");
@@ -861,6 +864,10 @@ class PaperTable {
         if ($submitm) {
             echo '<p class="feedback is-urgent-note if-unready">',
                 Ftext::as(5, Ftext::join_nonempty(" ", [$updatem, $submitm, $freezem])), '</p>';
+        }
+        if ($registerm) {
+            echo '<p class="feedback is-urgent-note if-unready">',
+                Ftext::as(5, $registerm), '</p>';
         }
         if ($updatem || $freezem) {
             echo '<p class="feedback is-note if-ready',
