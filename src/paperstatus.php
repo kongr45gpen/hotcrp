@@ -771,7 +771,7 @@ class PaperStatus extends MessageSet {
         if ($pj_submitted !== $old_submitted
             || $this->_noncontacts_changed) {
             if ($this->prow->is_new()) {
-                $whynot = $this->user->perm_start_paper($this->prow);
+                $whynot = $this->user->perm_start_paper($this->prow, $this->conf->unreg_submit);
             } else {
                 $whynot = $this->user->perm_edit_paper($this->prow);
             }

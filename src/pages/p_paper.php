@@ -195,7 +195,7 @@ class Paper_Page {
         // NB PaperStatus also checks deadlines now; this is likely redundant.
         if ($is_new) {
             // we know that can_start_paper implies can_finalize_paper
-            $whynot = $this->user->perm_start_paper($this->prow);
+            $whynot = $this->user->perm_start_paper($this->prow, $conf->unreg_submit);
         } else {
             $whynot = $this->user->perm_edit_paper($this->prow);
             if ($whynot
@@ -293,6 +293,9 @@ class Paper_Page {
             }
         } else if ($is_new) {
             $this->ps->splice_msg($msgpos++, $conf->_("<0>Registered {submission} as #{}", $new_prow->paperId), MessageSet::SUCCESS);
+            if ($conf->unreg_submit) {
+                $this->ps->splice_msg($msgpos++, $conf->_("<0>All authors can make changes to this {submission} by creating an account and logging in with their author e-mail address."), MessageSet::SUCCESS);
+            }
         } else {
             $chf = array_map(function ($f) { return $f->edit_title(); }, $this->ps->changed_fields());
             $this->ps->splice_msg($msgpos++, $conf->_("<0>Updated {submission} (changed {:list})", $chf, new FmtArg("phase", $is_final ? "final" : "review")), MessageSet::SUCCESS);
@@ -356,7 +359,11 @@ class Paper_Page {
 
         $conf->paper = $this->prow = $new_prow;
         if (!$this->ps->has_error() || ($is_new && $new_prow)) {
-            $conf->redirect_self($this->qreq, ["p" => $new_prow->paperId, "m" => "edit"]);
+            if ($this->user->perm_edit_paper($this->prow)) {
+                $conf->redirect();
+            } else {
+                $conf->redirect_self($this->qreq, ["p" => $new_prow->paperId, "m" => "edit"]);
+            }
         }
         $this->useRequest = false;
     }
@@ -518,7 +525,7 @@ class Paper_Page {
                 && $user->privChair) {
                 $user->add_overrides(Contact::OVERRIDE_CONFLICT);
             }
-            if (($perm = $user->perm_start_paper($pp->prow))) {
+            if (($perm = $user->perm_start_paper($pp->prow, $user->conf->unreg_submit))) {
                 $pp->error_exit($perm);
             }
         }

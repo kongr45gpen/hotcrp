@@ -607,6 +607,8 @@ class Conf {
             $this->snouns = ["submission", "submissions", "Submission", "Submissions"];
         }
 
+        $this->unreg_submit = $this->opt["allowUnregisteredSubmissions"] ?? false;
+
         // expand ${confid}, ${confshortname}
         foreach (["sessionName", "downloadPrefix", "conferenceSite",
                   "paperSite", "defaultPaperSite", "contactName",

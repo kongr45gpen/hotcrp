@@ -527,7 +527,7 @@ class Home_Page {
         } else {
             $dltx = "";
         }
-        if ($user->has_email()) {
+        if ($user->has_email() || $conf->unreg_submit) {
             $url = $conf->hoturl("paper", [
                 "p" => "new", "sclass" => $sr->unnamed ? null : $sr->tag
             ]);
