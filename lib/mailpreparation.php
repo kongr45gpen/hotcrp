@@ -282,7 +282,8 @@ class MailPreparation implements JsonSerializable {
             && ($this->conf->opt("internalMailer") ?? strncasecmp(PHP_OS, "WIN", 3) != 0)
             && ($sendmail = ini_get("sendmail_path"))) {
             $htext = join("", $headers);
-            $f = popen($extra ? "$sendmail $extra" : $sendmail, "wb");
+            $recipients = escapeshellarg(join(" ", $vto));
+            $f = popen($extra ? "$sendmail $extra $recipients" : "$sendmail $recipients", "wb");
             fwrite($f, $htext . $eol . $qpe_body);
             $status = pclose($f);
             if (pcntl_wifexitedwith($status, 0)) {
