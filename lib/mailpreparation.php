@@ -195,7 +195,7 @@ class MailPreparation implements JsonSerializable {
                 $mx["fake"][] = $ru->email;
             } else if ($ru->is_disabled()) {
                 $mx["disabled"][] = $ru->email;
-            } else if ($ru->is_dormant() && !$this->_self_requested) {
+            } else if ($ru->is_dormant() && !$this->_self_requested && !$this->conf->unreg_submit) {
                 $mx["dormant"][] = $ru->email;
             } else if ($ru->is_unconfirmed() && $this->conf->opt("sendEmailUnconfirmed") === false) {
                 $mx["unconfirmed"][] = $ru->email;

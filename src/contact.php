@@ -1057,7 +1057,7 @@ class Contact implements JsonSerializable {
      * @return bool */
     function can_receive_mail($self_requested = false) {
         $disabled = self::CFM_DISABLEMENT;
-        if ($self_requested) {
+        if ($self_requested || $this->conf->unreg_submit) {
             $disabled &= ~self::CF_PLACEHOLDER;
         } else if (($this->cflags & self::CF_UNCONFIRMED) !== 0
                    && $this->conf->opt("sendEmailUnconfirmed") === false) {
