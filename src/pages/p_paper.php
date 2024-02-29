@@ -219,10 +219,10 @@ class Paper_Page {
             $conf->feedback_msg($this->ps->decorated_message_list());
             return;
         }
-        if (!$this->user->can_view_paper($new_prow)) {
+        if (!$this->user->can_view_paper($new_prow) && !($is_new && $conf->unreg_submit)) {
             error_log("{$conf->dbname}: user {$this->user->email} #{$this->user->contactId} cannot view new paper #{$new_prow->paperId} because " . json_encode($this->user->perm_view_paper($new_prow)));
+            assert($this->user->can_view_paper($new_prow));
         }
-        assert($this->user->can_view_paper($new_prow));
 
         // submit paper if no error so far
         $_GET["paperId"] = $_GET["p"] = $this->qreq->paperId = $this->qreq->p = $this->ps->paperId;
