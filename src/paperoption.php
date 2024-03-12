@@ -792,7 +792,7 @@ class PaperOption implements JsonSerializable {
             $fr = new FieldRender(FieldRender::CFHTML);
             $this->render_description($fr);
             $sfs->description = $fr->value_html();
-        }
+	}
 
         $sfs->display = $this->display_name();
         $sfs->order = $this->order;

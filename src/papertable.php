@@ -165,9 +165,11 @@ class PaperTable {
     static function print_header($paperTable, $qreq, $error = false) {
         $conf = $paperTable ? $paperTable->conf : $qreq->conf();
         $prow = $paperTable ? $paperTable->prow : null;
-        $format = 0;
+	$format = 0;
 
-        $t = '<header id="h-page" class="header-page-submission"><h1 class="paptitle';
+	$logos = ($paperTable->conf) ? $paperTable->conf->logos() : "";
+
+        $t = '<header id="h-page" class="header-page-submission">' . $logos . '<h1 class="paptitle';
 
         if (!$paperTable) {
             if (($pid = $qreq->paperId) && ctype_digit($pid)) {
@@ -496,7 +498,7 @@ class PaperTable {
         if ((!$opt->test_exists($this->prow) && !$this->settings_mode)
             || ($rest["hidden"] ?? false)) {
             echo ' hidden';
-        }
+	}
         if ($opt->has_complex_exists_condition()
             && !$this->settings_mode
             && $input) {

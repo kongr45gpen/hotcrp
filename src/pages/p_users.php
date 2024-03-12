@@ -25,7 +25,7 @@ class Users_Page {
 
         $this->limits = [];
         if ($viewer->can_view_pc()) {
-            $this->limits["pc"] = "Program committee";
+            $this->limits["pc"] = "Scientific committee";
         }
         foreach ($this->conf->viewable_user_tags($viewer) as $t) {
             if ($t !== "pc")
@@ -463,7 +463,7 @@ class Users_Page {
 
     private function print() {
         if ($this->qreq->t === "pc") {
-            $title = "Program committee";
+            $title = "Scientific committee";
         } else if (str_starts_with($this->qreq->t, "#")) {
             $title = "#" . substr($this->qreq->t, 1) . " program committee";
         } else {

@@ -153,7 +153,7 @@ class Home_Page {
     }
     static function print_info_pc(Contact $user) {
         if ($user->can_view_pc()) {
-            echo '<li>', Ht::link("Program committee", $user->conf->hoturl("users", "t=pc")), '</li>';
+            echo '<li>', Ht::link("Scientific committee", $user->conf->hoturl("users", "t=pc")), '</li>';
         }
     }
     static function print_info_site(Contact $user) {

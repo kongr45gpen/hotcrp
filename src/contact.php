@@ -3802,7 +3802,7 @@ class Contact implements JsonSerializable {
             } else {
                 return 2;
             }
-        } else if ($oview === PaperOption::VIS_SUB || $rights->act_author_view) {
+	} else if ($oview === PaperOption::VIS_SUB || $rights->act_author_view) {
             return 2;
         } else if ($oview === PaperOption::VIS_AUTHOR) {
             return $rights->view_authors_state;

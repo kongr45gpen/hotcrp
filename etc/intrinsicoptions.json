@@ -60,7 +60,8 @@
         "visibility": "conflict",
         "form_order": 3050,
         "display": "none",
-        "configurable": false, "function": "+Contacts_PaperOption"
+	"exists_if": "none",
+        "configurable": true, "properties": ["name", "description", "condition", "exists_if", "edit_condition", "editable_if"], "function": "+Contacts_PaperOption"
     },
     {
         "name": "Topics", "id": -1005,

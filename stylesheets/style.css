@@ -1246,7 +1246,7 @@ ul.semi > li:last-child::after, ul.comma > li:last-child::after {
 
 /* Main */
 h2.home, h4.home {
-	color: #c72047;
+	color: var(--heading-fg, #c72047);
 	/* #c72047 #ba2347 #a3213f #9e2441 */
 	margin-bottom: 0.5rem;
 	font-size: 1.15rem;

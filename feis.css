@@ -1,0 +1,96 @@
+body {
+	--submission-bg-dark: #ddd;
+	--submission-bg: #eee;
+	--submission-sidebar-bg: #eee;
+
+	--brand-fg: #72278f;
+	--brand-bg-dark: #D9AFE9;
+	--headline-fg: #49195c;
+	--headline-decor: #9031b5;
+	--heading-fg: #7F2CA0;
+}
+
+.header-page-submission {
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: space-between;
+	align-items: center;
+}
+
+@media (max-width: 500px) {
+	.header-page-submission {
+		flex-direction: column;
+	}
+}
+
+.header-fancy-logos {
+	object-fit: contain;
+	display: block;
+
+	max-height: 80px;
+}
+
+.header-under-logos {
+	max-height: 100px;
+	object-fit: contain;
+	display: block;
+	width: 100%;
+	padding: 3px; 
+	box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.header-site-home {
+	margin-bottom: 1em;
+}
+
+.header-fancy {
+	display: flex;
+	width: 100%;
+	clear: both;
+/*	border-top: 1em solid white;*/
+
+	height: 20vh;
+	min-height: 200px;
+
+	background-color: var(--submission-bg-dark);
+	background: url('images/nebula_upscale.webp');
+	background-position: center center;
+	background-size: cover;
+
+	align-items: center;
+	justify-content: center;
+	gap: 0.2em;
+	flex-direction: column;
+	text-align: center;
+
+	color: white;
+	text-shadow: 2px 2px 4px black, 2px -2px 4px rgba(0,0,0,0.5);
+
+	box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.header-fancy .q {
+	transition: 0.1s all;
+	border-bottom: 2px solid transparent;
+	line-height: 1.1;
+}
+
+.header-fancy .q:hover {
+	border-bottom: 2px solid white;
+	text-decoration: none;
+	color: white;
+}
+
+.header-page-submission {
+	margin-top: -14px;
+}
+
+.header-fancy-site-name {
+	font-size: 28pt;
+	font-weight: 600;
+}
+
+.header-fancy-site-subtitle {
+	font-size: 15pt;
+	font-weight: 400;
+}

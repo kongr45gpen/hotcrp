@@ -4730,37 +4730,59 @@ class Conf {
         }
     }
 
+    private function print_fancy_header() {
+        echo '<div id="h-fheader" class="header-fancy">';
+        echo '<a class="q header-fancy-site-name" href="', $this->hoturl("index", ["cap" => null]), '">', htmlspecialchars($this->long_name), '</a>';
+	echo '<span class="header-fancy-site-subtitle">Submission Website</span>';
+	echo '</div>';
+    }
+
+    function logos($class = "header-fancy-logos") {
+	return Ht::img("logos.webp", "[Sponsor Logos]", $class);
+    }
+
     /** @param Qrequest $qreq
      * @param string|list<string> $title */
     private function print_body_header($qreq, $title, $id, $extra) {
         if ($id === "home" || ($extra["hide_title"] ?? false)) {
             echo '<div id="h-site" class="header-site-home">',
                 '<h1><a class="q" href="', $this->hoturl("index", ["cap" => null]),
-                '">', htmlspecialchars($this->short_name), '</a></h1></div>';
+                '">', htmlspecialchars($this->long_name), '</a></h1></div>';
         } else {
             echo '<div id="h-site" class="header-site-page">',
                 '<a class="q" href="', $this->hoturl("index", ["cap" => null]),
-                '"><span class="header-site-name">', htmlspecialchars($this->short_name),
+                '"><span class="header-site-name">', htmlspecialchars($this->long_name),
                 '</span> Home</a></div>';
-        }
+	}
 
         echo '<div id="h-right">';
         if (($user = $qreq->user()) && !$user->is_empty()) {
             $this->print_header_profile($id, $qreq, $user);
-        }
-        echo '</div>';
+	}
+	echo '</div>';
+
+	if (!in_array($id, ["settings", "actionlog", "mail"])) {
+		$this->print_fancy_header();
+	}
+
+	if (in_array($id, ["home", "deadlines"])) {
+            echo $this->logos("header-under-logos");
+	}
+
         if (!($extra["hide_title"] ?? false)) {
             $title_div = $extra["title_div"] ?? null;
-            if ($title_div === null) {
+	    if ($title_div === null) {
                 if (($subtitle = $extra["subtitle"] ?? null)) {
                     $title .= " &nbsp;&#x2215;&nbsp; <strong>{$subtitle}</strong>";
                 }
-                if ($title && $title !== "Home") {
+		if ($title && $title !== "Home") {
+		    $logos = $this->logos();
                     $title_div = "<div id=\"h-page\"><h1>{$title}</h1></div>";
                 }
             }
-            echo $title_div ?? "";
-        }
+	    echo $title_div ?? "";
+	}
+
         echo $extra["action_bar"] ?? QuicklinksRenderer::make($qreq),
             "<hr class=\"c\">\n";
     }
