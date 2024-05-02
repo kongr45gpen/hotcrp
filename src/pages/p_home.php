@@ -595,14 +595,14 @@ class Home_Page {
         echo '<div class="homegrp" id="homeau">', $this->print_h2_home(Ftext::as(5, $t));
 
         if (!empty($srlist)) {
-            if (!$user->has_email()) {
-                echo "<p>", Ht::link("Sign in", $conf->hoturl("signin")),
-                    " to manage {$conf->snouns[1]}.</p>";
-            }
-            usort($srlist, "SubmissionRound::compare");
             foreach ($srlist as $sr) {
                 $this->print_new_submission($user, $sr);
             }
+            if (!$user->has_email()) {
+                echo "<p>", Ht::link("Sign in", $conf->hoturl("signin")),
+                    " to manage previous {$conf->snouns[1]}.</p>";
+            }
+            usort($srlist, "SubmissionRound::compare");
         }
 
         $plist = null;

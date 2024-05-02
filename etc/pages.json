@@ -95,7 +95,7 @@
         "name": "home/main/welcome", "order": 1200, "allow_if": "!pc",
         "print_function": "*Home_Page::print_welcome"
     },
-    [   "home/main/signin", 3000, "*Home_Page::print_signin"   ],
+    [   "home/main/signin", 7500, "*Home_Page::print_signin"   ],
     {
         "name": "home/main/search", "order": 4000,
         "print_function": "*Home_Page::print_search"

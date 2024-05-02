@@ -247,10 +247,10 @@ class Signin_Page {
     }
 
     static function print_signin_form_create(Contact $user) {
-        if (!$user->conf->login_type() && $user->conf->allow_user_self_register()) {
-            echo '<p class="mt-3 mb-0 hint fx">New to the site? <a href="',
+	if (!$user->conf->login_type() && $user->conf->allow_user_self_register()) {
+            echo "<p class=\"mt-3 mb-0 hint fx\">You don't need an account to create a {$user->conf->snouns[0]}.<br> To manage previous {$user->conf->snouns[1]}, <a href=\"",
                 $user->conf->hoturl("newaccount"),
-                '" class="uic js-href-add-email">Create an account</a></p>';
+                '" class="uic js-href-add-email">create an account</a>.</p>';
         }
     }
 
