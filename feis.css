@@ -23,20 +23,52 @@ body {
 	}
 }
 
-.header-fancy-logos {
+.header-fancy-logos img {
 	object-fit: contain;
-	display: block;
-
 	max-height: 80px;
+	text-align: center;
 }
 
 .header-under-logos {
-	max-height: 100px;
-	object-fit: contain;
+	width: 100%;
 	display: block;
 	width: 100%;
 	padding: 3px; 
 	box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+	text-align: center;
+}
+
+.header-under-logos img:nth-child(1) {
+	padding: 20px 15px;
+}
+
+.header-fancy-logos img:nth-child(1) {
+	padding: 15px 10px;
+}
+	
+.header-under-logos img {
+	max-height: 100px;
+	object-fit: contain;
+	vertical-align: middle;
+}
+
+@media (max-width: 768px) {
+	.header-under-logos img {
+		max-height: 82px;
+	}
+
+	.header-fancy-logos img {
+		max-height: 50px;
+	}
+
+	.header-fancy-logos img:nth-child(1) {
+		padding: 5px 5px;
+	}
+
+	.header-under-logos img:nth-child(1) {
+		max-height: 90px;
+		padding: 5px 5px;
+	}
 }
 
 .header-site-home {
@@ -53,8 +85,8 @@ body {
 	min-height: 200px;
 
 	background-color: var(--submission-bg-dark);
-	background: url('images/nebula_upscale.webp');
-	background-position: center center;
+	background: url('images/exoplanet_sails.webp');
+	background-position: center 26%;
 	background-size: cover;
 
 	align-items: center;
@@ -67,6 +99,18 @@ body {
 	text-shadow: 2px 2px 4px black, 2px -2px 4px rgba(0,0,0,0.5);
 
 	box-shadow: 0 0 10px rgba(0,0,0,0.2);
+
+	position: relative;
+}
+
+.header-fancy::after {
+	content: "Background designed by Maciej Rebisz for Science Now";
+	position: absolute;
+	text-shadow: none;
+	right: 1rem;
+	bottom: 1rem;
+	font-size: 9pt;
+	color: rgba(200,200,200,0.7);
 }
 
 .header-fancy .q {
@@ -81,6 +125,12 @@ body {
 	color: white;
 }
 
+@media (max-width: 768px) {
+	.header-fancy {
+		min-height: 400px;
+	}
+}
+
 .header-page-submission {
 	margin-top: -14px;
 }
@@ -93,4 +143,50 @@ body {
 .header-fancy-site-subtitle {
 	font-size: 15pt;
 	font-weight: 400;
+}
+
+body.body-signin {
+	background-color: white;
+}
+
+/*
+@media (min-width: 1100px) {
+	.footer-socials {
+		float: right;
+	}
+
+	.footer-legal {
+		float: left;
+	}
+}*/
+
+@media (min-width: 1100px) {
+	.footer-text{
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding-bottom: 20px;
+	}
+}
+
+@media (min-width: 769px) {
+	.paper .footer-text {
+		margin-left: 15.5rem;
+	}
+}
+
+.footer-legal {
+	color: #555;
+	font-size: 9.5pt;
+	margin: 1rem 0.5rem;
+}
+
+.footer-legal a:link, .footer-legal a:visited {
+	color: #555;
+}
+
+.footer-socials svg {
+	width: 24px;
+	margin: 0.5rem;
+	fill: #333;
 }

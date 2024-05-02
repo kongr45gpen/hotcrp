@@ -4738,7 +4738,8 @@ class Conf {
     }
 
     function logos($class = "header-fancy-logos") {
-	return Ht::img("logos.webp", "[Sponsor Logos]", $class);
+	    return "<div class=\"$class\">" . "<a href=\"https://uni.lu/\">" 
+		    . Ht::img("mainlogo.svg", "[Organiser Logo]") . "</a>" . Ht::img("logos.webp", "[Sponsor Logos]") . '</div>';
     }
 
     /** @param Qrequest $qreq
