@@ -166,7 +166,7 @@ class Ht {
         if (!$enctype && $method !== "get") {
             $enctype = "multipart/form-data";
         }
-        if ($enctype) {
+        if ($enctype and false) {
             $x .= " enctype=\"{$enctype}\"";
         }
         return $x . ' accept-charset="UTF-8"' . self::extra($extra) . $suffix;

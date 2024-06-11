@@ -19,6 +19,7 @@ class Sround_Setting {
     static function make_json($jx) {
         $sr = new Sround_Setting;
         $sr->id = $sr->tag = $jx->tag;
+        $sr->name = $jx->name ?? "";
         $sr->open = $jx->open ?? 0;
         $sr->register = $jx->register ?? 0;
         $sr->submit = $jx->submit ?? 0;
@@ -28,7 +29,10 @@ class Sround_Setting {
     }
 
     function export_json() {
-        $j = ["tag" => $this->tag];
+	$j = ["tag" => $this->tag];
+	if (!empty($this->name)) {
+	    $j["name"] = $this->name;
+	}
         if ($this->open > 0) {
             $j["open"] = $this->open;
         }
@@ -110,7 +114,8 @@ class Sround_SettingParser extends SettingParser {
         $sv->print_feedback_at($namesi->name);
 
         // deadlines
-        echo "<div id=\"submission/{$ctr}/edit\"><div class=\"flex-grow-0\">";
+	echo "<div id=\"submission/{$ctr}/edit\"><div class=\"flex-grow-0\">";
+	$sv->print_entry_group("submission/{$ctr}/name", "Display name", ["horizontal" => true, "group_class" => "medium"]);
         $sv->print_entry_group("submission/{$ctr}/registration", "Registration deadline", ["horizontal" => true, "group_class" => "medium"]);
         $sv->print_entry_group("submission/{$ctr}/done", "Submission deadline", ["horizontal" => true, "group_class" => "medium"]);
         echo '</div></div></fieldset>';

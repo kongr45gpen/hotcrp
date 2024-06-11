@@ -406,6 +406,11 @@
         "title": "/Submission deadline",
         "type": "date", "placeholder": "none"
     },
+    {
+	"name_pattern": "submission/$/name", "storage": "member.name",
+	"title": "/Display name", "placeholder": "(tag)",
+	"type": "string"
+    },
 
 
     {

@@ -3232,6 +3232,7 @@ class Conf {
         if ($this->_sub_rounds === null) {
             $this->_sub_rounds = [];
             $main_sr = $this->unnamed_submission_round();
+            $this->_sub_rounds[] = $main_sr;
             if (($t = $this->settingTexts["submission_rounds"] ?? null)
                 && ($j = json_decode($t))
                 && is_array($j)) {
@@ -3240,7 +3241,6 @@ class Conf {
                         $this->_sub_rounds[] = $sr;
                 }
             }
-            $this->_sub_rounds[] = $main_sr;
         }
         return $this->_sub_rounds;
     }

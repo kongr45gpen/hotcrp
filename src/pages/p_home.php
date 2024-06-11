@@ -532,7 +532,7 @@ class Home_Page {
                 "p" => "new", "sclass" => $sr->unnamed ? null : $sr->tag
             ]);
             $actions = [[
-                "<a class=\"btn\" href=\"{$url}\">" . $conf->_c5("paper_edit", "<0>New {sclass} {submission}", new FmtArg("sclass", $sr->tag)) . "</a>",
+                "<a class=\"btn\" href=\"{$url}\">" . $conf->_c5("paper_edit", "<0>New {sclass} {submission}", new FmtArg("sclass", $sr->title1)) . "</a>",
                 $sr->time_register(true) ? "" : "(admin only)"
             ]];
             if ($dltx !== "") {
