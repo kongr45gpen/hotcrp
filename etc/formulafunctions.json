@@ -47,6 +47,7 @@
     {"name": "pow", "args": 2, "function": "+Math_Fexpr"},
     {"name": "exp", "args": 1, "function": "+Math_Fexpr"},
     {"name": "isnull", "args": 1, "function": "+IsNull_Fexpr"},
+    {"name": "histo", "args": 4, "function": "+Histogram_Fexpr"},
 
     {"name": "pid", "function": "+Pid_Fexpr"},
     {"name": "paperid", "function": "+Pid_Fexpr"},

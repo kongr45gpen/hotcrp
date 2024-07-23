@@ -254,6 +254,33 @@ class HotCRPMailer extends Mailer {
         return $text;
     }
 
+    /** @param Contact $user
+     * @param int $flags
+     * @param ?int $review_round
+     * @return string */
+    private function count_assignments($user, $flags, $review_round) {
+        $where = [
+            "r.contactId={$user->contactId}",
+            "p.timeSubmitted>0"
+        ];
+        if (($flags & self::GA_SINCE) !== 0) {
+            $where[] = "r.timeRequested>r.timeRequestNotified";
+            if ($this->newrev_since) {
+                $where[] = "r.timeRequested>={$this->newrev_since}";
+            }
+        }
+        if (($flags & self::GA_NEEDS_SUBMIT) !== 0) {
+            $where[] = "r.reviewSubmitted is null";
+            $where[] = "r.reviewNeedsSubmit!=0";
+        }
+        if (($flags & self::GA_ROUND) !== 0 && $review_round !== null) {
+            $where[] = "r.reviewRound={$review_round}";
+        }
+        $result = $this->conf->qe("select count(r.paperId)
+                from PaperReview r join Paper p using (paperId)
+		where " . join(" and ", $where) . " order by r.paperId");
+        return $result->fetch_column();
+    }
 
     function infer_user_name($r, $contact) {
         // If user hasn't entered a name, try to infer it from author records
@@ -364,6 +391,21 @@ class HotCRPMailer extends Mailer {
     function kw_newassignments() {
         return $this->get_assignments($this->recipient, self::GA_SINCE | self::GA_NEEDS_SUBMIT, null);
     }
+
+    function kw_assignmentstatistic($args, $isbool, $uf) {
+	switch ($uf->statindex) {
+	    case 1:
+      		return $this->count_assignments($this->recipient, self::GA_NEEDS_SUBMIT, null);
+		break;
+	    case 2:
+		return $this->count_assignments($this->recipient, 0, null) - $this->count_assignments($this->recipient, self::GA_NEEDS_SUBMIT, null);
+		break;
+	    case 0:
+	    default:
+	        return $this->count_assignments($this->recipient, 0, null);
+	}
+    }
+
     function kw_haspaper($uf = null, $name = null) {
         if ($this->row && $this->row->paperId > 0) {
             if ($this->preparation

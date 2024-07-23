@@ -39,6 +39,10 @@
     {"name": "NUMSUBMITTED", "function": "*kw_statistic", "global": true, "statindex": 0},
     {"name": "NUMACCEPTED", "function": "*kw_statistic", "global": true, "statindex": 1},
 
+    {"name": "REVIEWTOTAL", "function": "*kw_assignmentstatistic", "statindex": 0},
+    {"name": "REVIEWPENDING", "function": "*kw_assignmentstatistic", "statindex": 1},
+    {"name": "REVIEWDONE", "function": "*kw_assignmentstatistic", "statindex": 2},
+
     {"name": "TITLE", "function": "*kw_title", "expand_if": "*kw_haspaper"},
     {"name": "TITLEHINT", "function": "*kw_titlehint", "expand_if": "*kw_haspaper"},
     {"name": "ABSTRACT", "function": "*kw_abstract", "expand_if": "*kw_haspaper"},

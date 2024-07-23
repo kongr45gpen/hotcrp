@@ -7,7 +7,7 @@ class SubForm_SettingRenderer {
         $sel = [
             0 => "Abstract required to register submission",
             2 => "Abstract optional",
-            1 => "No abstract"
+	    1 => "No abstract",
         ];
         if ($sv->oldv("sf_abstract") == -1 || $sv->newv("sf_abstract") == -1) {
             $sel[-1] = "Other";

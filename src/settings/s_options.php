@@ -752,7 +752,7 @@ class Options_SettingParser extends SettingParser {
                 $sv->save("sf/{$ctr}/required", $default_required);
             } else if ($wizval === 1) {
                 $sv->save("sf/{$ctr}/condition", "NONE");
-            } else {
+            } else if ($wizval === 2) {
                 $sv->save("sf/{$ctr}/required", 0);
             }
             if ($wizval !== 1 && $sv->newv("sf/{$ctr}/condition") === "NONE") {

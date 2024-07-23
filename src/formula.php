@@ -812,6 +812,38 @@ class Math_Fexpr extends Fexpr {
     }
 }
 
+class Histogram_Fexpr extends Fexpr {
+    function __construct($ff) {
+        parent::__construct($ff);
+        //$this->set_format(self::FUNKNOWN, true);
+    }
+    function typecheck(Formula $formula) {
+        return $this->typecheck_arguments($formula, true);
+    }
+    static function histogram($v, $min, $max, $binsize) {
+        $avgshift = $binsize / 2;
+
+        if ($v >= $max) {
+            return $max + $avgshift;
+        }
+        if ($v < $min) {
+            return $min + $avgshift;
+        }
+
+        $bin = floor(($v - $min) / $binsize);
+
+        return $min + $bin * $binsize + $avgshift;
+    }
+    function compile(FormulaCompiler $state) {
+        $v = $state->_addltemp($this->args[0]->compile($state));
+        $min = $state->_addltemp($this->args[1]->compile($state));
+        $max = $state->_addltemp($this->args[2]->compile($state));
+        $binsize = $state->_addltemp($this->args[3]->compile($state));
+
+        return $this->check_null_args("Histogram_Fexpr::histogram({$v}, ${min}, ${max}, ${binsize})", $v, $min, $max, $binsize);
+    }
+}
+
 class IsNull_Fexpr extends Fexpr {
     function __construct($ff) {
         parent::__construct($ff);
